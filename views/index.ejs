@@ -16,10 +16,8 @@
       <div class="deck">
         <div v-for="card in cards" :key="card.id"
              class="card"
-             :class="suitColor[card.suit]">
-          <span class="card__suit card__suit--top">{{ card.suit }}</span>
-          <span class="card__number">{{ card.rank }} </span>
-          <span class="card__suit card__suit--bottom">{{ card.suit }}</span>
+             :class="[card.rank ,card.suit]">
+          <img :src="card.image">
         </div>
       </div>
     </div>
@@ -29,9 +27,10 @@
       new Vue({
         el: '#app',
         data: {
-          ranks: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
-          suits: ['♥','♦','♠','♣'],
+          ranks: ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'],
+          suits: ['clubs','diamonds','hearts','spades'],
           cards: [],
+          image:[],
           suitColor: {
             '♠': 'black',
             '♣': 'black',
@@ -52,7 +51,9 @@
                 let card = {
                   id: id,
                   rank: this.ranks[r],
-                  suit: this.suits[s]
+                  suit: this.suits[s],
+                  image:'/images/'+this.ranks[r]+'_of_'+this.suits[s]+'.png'
+
                 }
                 this.cards.push(card);
                 id++;
