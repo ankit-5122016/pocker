@@ -46,13 +46,13 @@
             let id = 1;
             this.cards = [];
 
-            for( let s = 0; s < this.suits.length; s++ ) {
-              for( let r = 0; r < this.ranks.length; r++ ) {
+            for( let s of this.suits) {
+              for( let r of this.ranks ) {
                 let card = {
                   id: id,
-                  rank: this.ranks[r],
-                  suit: this.suits[s],
-                  image:'/images/'+this.ranks[r]+'_of_'+this.suits[s]+'.png'
+                  rank: r,
+                  suit: s,
+                  image:'/images/'+r+'_of_'+s+'.png'
 
                 }
                 this.cards.push(card);
