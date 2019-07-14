@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="title">
+
+        Card Shuffling
+      </h1>
+      <div class="deck">
+        <div v-for="card in cards" :key="card.id"
+             class="card"
+             :class="suitColor[card.suit]">
+          <span class="card__suit card__suit--top">{{ card.suit }}</span>
+          <span class="card__number">{{ card.rank }} </span>
+          <span class="card__suit card__suit--bottom">{{ card.suit }}</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+    <script type="application/javascript">
+      new Vue({
+        el: '#app',
+        data: {
+          ranks: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+          suits: ['♥','♦','♠','♣'],
+          cards: [],
+          suitColor: {
+            '♠': 'black',
+            '♣': 'black',
+            '♦': 'red',
+            '♥': 'red',
+          },
+        },
+        created() {
+          this.displayInitialDeck();
+        },
+        methods: {
+          displayInitialDeck() {
+            let id = 1;
+            this.cards = [];
+
+            for( let s = 0; s < this.suits.length; s++ ) {
+              for( let r = 0; r < this.ranks.length; r++ ) {
+                let card = {
+                  id: id,
+                  rank: this.ranks[r],
+                  suit: this.suits[s]
+                }
+                this.cards.push(card);
+                id++;
+              }
+            }
+            function shuffle(arra1) {
+              var ctr = arra1.length, temp, index;
+
+// While there are elements in the array
+              while (ctr > 0) {
+// Pick a random index
+                index = Math.floor(Math.random() * ctr);
+// Decrease ctr by 1
+                ctr--;
+// And swap the last element with it
+                temp = arra1[ctr];
+                arra1[ctr] = arra1[index];
+                arra1[index] = temp;
+              }
+              return arra1;
+            }
+            this.cards=shuffle(this.cards);
+            this.cards=(this.cards).slice(0,5)
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
