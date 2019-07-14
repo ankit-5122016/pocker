@@ -1,86 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 
 
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="title">
+</head>
+<body>
+<div id="app">
+  <h1 class="title">
 
-        Card Shuffling
-      </h1>
-      <div class="deck">
-        <div v-for="card in cards" :key="card.id"
-             class="card"
-             :class="[card.rank ,card.suit]">
-          <img :src="card.image">
-        </div>
-      </div>
-    </div>
+    Card Shuffling
+  </h1>
+  <div v-for="card in cards"
+       class="card"
+       :class="[card.rank ,card.suit]">
+    <img :src="card.image">
+  </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-    <script type="application/javascript">
-      new Vue({
-        el: '#app',
-        data: {
-          ranks: ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'],
-          suits: ['clubs','diamonds','hearts','spades'],
-          cards: [],
-          image:[],
-          suitColor: {
-            '♠': 'black',
-            '♣': 'black',
-            '♦': 'red',
-            '♥': 'red',
-          },
-        },
-        created() {
-          this.displayInitialDeck();
-        },
-        methods: {
-          displayInitialDeck() {
-            let id = 1;
-            this.cards = [];
 
-            for( let s of this.suits) {
-              for( let r of this.ranks ) {
-                let card = {
-                  id: id,
-                  rank: r,
-                  suit: s,
-                  image:'/images/'+r+'_of_'+s+'.png'
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script type="application/javascript">
+  new Vue({
+    el: '#app',
+    data: {
+      ranks: ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king'],
+      suits: ['clubs','diamonds','hearts','spades'],
+      cards: [],
+      image:[],
+    },
+    created() {
+      this.displayInitialDeck();
+    },
+    methods: {
+      displayInitialDeck() {
+        this.cards = [];
 
-                }
-                this.cards.push(card);
-                id++;
-              }
+        for( let s of this.suits) {
+          for( let r of this.ranks ) {
+            let card = {
+              rank: r,
+              suit: s,
+              image:'/images/'+r+'_of_'+s+'.png'
+
             }
-            function shuffle(arra1) {
-              var ctr = arra1.length, temp, index;
+            this.cards.push(card);
+          }
+        }
+        function shuffle(arra1) {
+          var ctr = arra1.length, temp, index;
 
 // While there are elements in the array
-              while (ctr > 0) {
+          while (ctr > 0) {
 // Pick a random index
-                index = Math.floor(Math.random() * ctr);
+            index = Math.floor(Math.random() * ctr);
 // Decrease ctr by 1
-                ctr--;
+            ctr--;
 // And swap the last element with it
-                temp = arra1[ctr];
-                arra1[ctr] = arra1[index];
-                arra1[index] = temp;
-              }
-              return arra1;
-            }
-            this.cards=shuffle(this.cards);
-            this.cards=(this.cards).slice(0,5)
-          },
-        },
-      });
-    </script>
-  </body>
+            temp = arra1[ctr];
+            arra1[ctr] = arra1[index];
+            arra1[index] = temp;
+          }
+          // this.shuffle();
+          return arra1;
+        }
+        this.cards=shuffle(this.cards);
+        this.cards=(this.cards).slice(0,5)
+      },
+
+
+
+    },
+  });
+</script>
+</body>
 </html>
 
