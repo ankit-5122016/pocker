@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"/>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css' />
 
 
 </head>
 <body>
-<div id="app">
-  <h1 class="title">
 
-    Card Shuffling
-  </h1>
-  <h2>{{resultString}}</h2>
-  <div v-for="card in cards"
-       class="card"
-       :class="[card.rank ,card.suit]">
-    <img :src="card.image">
+<div id="app">
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>Card Shuffling</h1>
+      <p>{{resultString}}</p>
+    </div>
+  </div>
+
+
+
+  <div class="container-fluid bg-3 text-center">
+<!--    <h3>Some of my Work</h3><br>-->
+    <div class="row"  style="margin-left:15%">
+      <div class="col-sm-2" v-for="card in cards" :class="[card.rank ,card.suit]">
+        <img :src="card.image" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+    </div>
   </div>
 </div>
 
