@@ -9,9 +9,10 @@
 <body>
 
 <div id="app">
-  <div class="jumbotron">
+  <div class="jumbotron" style="background-color: darkseagreen">
     <div class="container text-center">
       <h1>Card Shuffling</h1>
+      <button style="background-color: #00d1b2" @click="displayInitialDeck()">Deal</button>
       <p>{{resultString}}</p>
     </div>
   </div>
@@ -39,9 +40,6 @@
       cards: [],
       image:[],
       resultString:""
-    },
-    created() {
-      this.displayInitialDeck();
     },
     methods: {
       displayInitialDeck() {
@@ -130,11 +128,6 @@
           resultString = "nothing...";
         }
         this.resultString =resultString;
-        // document.getElementById("result").innerHTML = resultString;
-
-
-
-
         function isFlush(){
           for(var i = 0; i < 4; i ++){
             if(suitsArray[i] != suitsArray[i+1]){
