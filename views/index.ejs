@@ -69,23 +69,9 @@
         }
         this.cards=shuffle(this.cards);
         this.cards=(this.cards).slice(0,5)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        this.mainLogic();
+      },
+      mainLogic(){
         var valuesArray = [];
         var suitsArray = [];
         var resultString = "";
@@ -180,9 +166,6 @@
         }
 
         function duplicateCards(){
-          // alert(valuesArray)
-          // alert(suitsArray)
-
           var occurrencesFound = [];
           var result = "";
           for(var i = 0; i < valuesArray.length; i++){
@@ -209,10 +192,7 @@
           } while(index < valuesArray.length);
           return count;
         }
-      },
-
-
-
+      }
     },
   });
 </script>
