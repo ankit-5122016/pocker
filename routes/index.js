@@ -12,15 +12,36 @@ MongoClient.connect('mongodb+srv://admin:admin@cluster0-cryvl.mongodb.net/test?r
 })
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+router.get('/getinfo', function(req, res, next) {
+  console.log('3333333333333333333333333322222222223')
   db.collection('score').find().toArray(function (err, result) {
     if (err) throw err;
     else{
-      console.log(result[0].score)
-      res.render('index');
+      console.log(typeof result)
+      res.json(result);
     }
   })
 });
 
+router.post('/upsert', function(req, res, next) {
+  console.log('33333111111111111111111111111111111111111133333333333333333333322222222223')
+  console.log(req.params)
+  console.log(req.body.result)
+ /* db.collection('score').find().toArray(function (err, result) {
+    if (err) throw err;
+    else{
+      console.log(typeof result)
+      res.json(result);
+    }
+  })*/
+
+  db.collection('score').insertOne(
+      { score: req.body.score, result: req.body.result }
+  )
+});
 module.exports = router;
 
 
