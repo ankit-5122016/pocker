@@ -7,6 +7,7 @@ let a=new Vue({
         image:[],
         resultString:"",
         score:"",
+        highScore:"",
         currentScore:""
 
     },
@@ -111,7 +112,8 @@ let a=new Vue({
             }
             this.resultString =resultString;
             this.currentScore=currentScore;
-            this.upsertdata(currentScore,resultString)
+            if(this.currentScore > this.highScore)
+                this.upsertdata(currentScore,resultString);
             function isFlush(){
                 for(let i = 0; i < 4; i ++){
                     if(suitsArray[i] != suitsArray[i+1]){
@@ -187,7 +189,7 @@ let a=new Vue({
                     }
                 }
                 // console.log("hight score : ",score)
-
+                a.highScore=score;
                 a.score = "Best score : "+ score;
             }).catch(function (error) {
                 // handle error
