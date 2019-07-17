@@ -180,7 +180,6 @@ let a=new Vue({
             }
         },
         fetchData:()=>{
-            // this.score=0
             axios.get("/getinfo").then(function (response) {
                 let score=response.data[0].score
                 for (let i of response.data){
@@ -188,16 +187,11 @@ let a=new Vue({
                         score=i.score;
                     }
                 }
-                // console.log("hight score : ",score)
                 a.highScore=score;
                 a.score = "Best score : "+ score;
             }).catch(function (error) {
-                // handle error
                 console.log(error);
             })
-                .finally(function () {
-                    // always executed
-                });
         },
         upsertdata:(score,result)=>{
             axios.post('/upsert', {
