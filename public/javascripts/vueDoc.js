@@ -14,26 +14,6 @@ let a=new Vue({
         this.fetchData() //method1 will execute at pageload
     },
     methods: {
-        fetchData:()=>{
-            // this.score=0
-            axios.get("/getinfo").then(function (response) {
-                let score=response.data[0].score
-                for (let i of response.data){
-                    if(score< i.score){
-                        score=i.score;
-                    }
-                }
-                // console.log("hight score : ",score)
-
-                a.score = "Best score : "+ score;
-            }).catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-                .finally(function () {
-                    // always executed
-                });
-        },
         displayInitialDeck() {
             this.cards = [];
             for( let s of this.suits) {
@@ -71,8 +51,8 @@ let a=new Vue({
         mainLogic(){
             let valuesArray = [];
             let suitsArray = [];
-            var resultString = "";
-            var currentScore ="";
+            let resultString = "";
+            let currentScore ="";
             for(let l = 0; l < 5; l++){
                 valuesArray[l] = this.ranks.indexOf(this.cards[l].rank);
                 suitsArray[l] = this.suits.indexOf(this.cards[l].suit);
@@ -130,25 +110,8 @@ let a=new Vue({
                 currentScore = 0;
             }
             this.resultString =resultString;
-            this.currentScore = "Current score : "+ currentScore ;
-
-
-
-
-
-            axios.post('/upsert', {
-                result: resultString,
-                score: currentScore
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-
-
+            this.currentScore=currentScore;
+            this.upsertdata(currentScore,resultString)
             function isFlush(){
                 for(let i = 0; i < 4; i ++){
                     if(suitsArray[i] != suitsArray[i+1]){
@@ -213,6 +176,34 @@ let a=new Vue({
                 } while(index < valuesArray.length);
                 return count;
             }
+        },
+        fetchData:()=>{
+            // this.score=0
+            axios.get("/getinfo").then(function (response) {
+                let score=response.data[0].score
+                for (let i of response.data){
+                    if(score< i.score){
+                        score=i.score;
+                    }
+                }
+                // console.log("hight score : ",score)
+
+                a.score = "Best score : "+ score;
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+                .finally(function () {
+                    // always executed
+                });
+        },
+        upsertdata:(score,result)=>{
+            axios.post('/upsert', {
+                result,
+                score
+            }).then(function (response) {
+                    return response
+            });
         }
     },
 });
