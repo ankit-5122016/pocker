@@ -112,8 +112,10 @@ let a=new Vue({
             }
             this.resultString =resultString;
             this.currentScore="Current score : "+ currentScore;
-            if(currentScore > this.highScore)
+            if(currentScore > this.highScore){
                 this.upsertdata(currentScore,resultString);
+                this.highScore=currentScore;
+            }
             function isFlush(){
                 for(let i = 0; i < 4; i ++){
                     if(suitsArray[i] != suitsArray[i+1]){
