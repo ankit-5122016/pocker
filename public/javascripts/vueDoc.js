@@ -114,8 +114,8 @@ let a=new Vue({
             this.currentScore="Current score : "+ currentScore;
             if(currentScore > this.highScore){
                 this.upsertdata(currentScore,resultString);
-                this.score=currentScore;
-
+                this.highScore=currentScore;
+                this.score = "Best score : "+ currentScore;
             }
             function isFlush(){
                 for(let i = 0; i < 4; i ++){
